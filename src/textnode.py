@@ -2,6 +2,7 @@ from enum import Enum
 from htmlnode import LeafNode, ParentNode
 import re
 
+
 class TextType(Enum):
     NORMAL_TEXT = "text"
     BOLD_TEXT = "bold"
