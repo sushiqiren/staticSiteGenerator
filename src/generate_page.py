@@ -2,7 +2,7 @@ import os
 from textnode import markdown_to_html_node
 from extract_title import extract_title
 
-def generate_page(from_path, template_path, dest_path):
+def generate_page(from_path, template_path, dest_path, basepath="/"):
     print(f"Generating page: from {from_path} to {dest_path} using {template_path}")
     with open(from_path, 'r') as f:
         content = f.read()
@@ -13,6 +13,11 @@ def generate_page(from_path, template_path, dest_path):
     
     template = template.replace("{{ Title }}", title)
     template = template.replace("{{ Content }}", content)
+    
+    # Replace relative URLs with basepath
+    template = template.replace('href="/', f'href="{basepath}')
+    template = template.replace('src="/', f'src="{basepath}')
+    
     dest_dir = os.path.dirname(dest_path)
     if not os.path.exists(dest_dir):
         os.makedirs(dest_dir)
