@@ -54,7 +54,7 @@ def text_node_to_html_node(text_node):
                 raise ValueError(f"Invalid text type: {text_node.text_type}")
             
 def split_nodes_delimiter(old_nodes, delimiter, text_type):
-    if delimiter not in ["**", "*", "`"]:
+    if delimiter not in ["**", "*", "`", "_"]:
         raise ValueError(f"{delimiter} is not a valid markdown delimiter")
     result = []
     for node in old_nodes:
@@ -150,6 +150,8 @@ def text_to_textnodes(text):
     nodes = split_nodes_delimiter(nodes, "**", TextType.BOLD_TEXT)
     nodes = split_nodes_delimiter(nodes, "*", TextType.ITALIC_TEXT)
     nodes = split_nodes_delimiter(nodes, "`", TextType.CODE_TEXT)
+    # Process underscores for italics after other delimiters
+    nodes = split_nodes_delimiter(nodes, "_", TextType.ITALIC_TEXT)
     nodes = split_nodes_image(nodes)
     nodes = split_nodes_link(nodes)
     return nodes
