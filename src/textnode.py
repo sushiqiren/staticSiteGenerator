@@ -148,7 +148,7 @@ def split_nodes_link(old_nodes):
 def text_to_textnodes(text):
     nodes = [TextNode(text, TextType.NORMAL_TEXT)]
     nodes = split_nodes_delimiter(nodes, "**", TextType.BOLD_TEXT)
-    nodes = split_nodes_delimiter(nodes, "*", TextType.ITALIC_TEXT)
+    # nodes = split_nodes_delimiter(nodes, "*", TextType.ITALIC_TEXT)
     nodes = split_nodes_delimiter(nodes, "`", TextType.CODE_TEXT)
     # Process underscores for italics after other delimiters
     nodes = split_nodes_delimiter(nodes, "_", TextType.ITALIC_TEXT)
